@@ -30,7 +30,7 @@ h2 {
   align-items: center;
   gap: 10px;
   width: 430px;
-  margin: 10px auto;
+  margin: 10px auto 0;
 }
   
 .cards {
@@ -46,17 +46,30 @@ img {
 }
 
 #reset {
-    width: 130px;
-    height: 40px;
-    font-size: 1.3em;
-    margin: 20px auto;
-    border-radius: 5px;
-    border: none;
-    background-color: rgb(190, 190, 139);
-    color: #333;
-  }
+  width: 130px;
+  height: 40px;
+  font-size: 1.3em;
+  margin: 20px auto;
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(190, 190, 139);
+  color: #333;
+}
   
-  #reset:hover {
-    background-color:rgb(148, 148, 110);
-  }
+#reset:hover {
+  background-color:rgb(148, 148, 110);
+}
+
+#stars-wrapper {
+  display: flex;
+  margin: 10px auto 30px;
+  width: 185px;
+  height: 30px;
+  gap: 7px;
+}
+  
+#stars-wrapper img {
+  width: 25px;
+  height: auto;
+}
   

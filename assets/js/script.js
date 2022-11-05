@@ -83,6 +83,7 @@ function check(flipped0, flipped1) {
       setTimeout (function () {
         flipped0.style.visibility = "hidden";
         flipped1.style.visibility = "hidden";
+        getStar();
       // if all 12 cards have disappeared, execute function reward()
       let count = 0;
       for (let card of cards) {
@@ -150,6 +151,12 @@ function reward() {
   myNode.append(graphics);    
   displayResetButton();
 } 
+
+function getStar() {
+  let stars = document.getElementsByClassName('stars');
+  stars[k].setAttribute("src", "assets/images/yellow-star.jpg");
+  k++;
+}
 
 function displayResetButton() {
   let button = document.createElement('input');
