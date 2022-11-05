@@ -6,15 +6,13 @@ let k = 0;
 
 document.addEventListener("DOMContentLoaded", function() {
   cardImgs = assignImgToCards();
-  console.log(cardImgs);
-  //change the color of the card when mouseover
+  //change the color of the card at mouseover
   let cards = document.getElementsByClassName("cards");   
   for (let card of cards) {
     card.addEventListener("mouseover", changeColor);
     card.addEventListener("mouseout", changeColorBack); 
   }
-  let allCards = document.querySelector('#cards-wrapper'); 
-  allCards.addEventListener("click", flipCards);
+  addFlipCardsEventListener();
 });
 
 /**
@@ -68,12 +66,14 @@ function flipCards(event) {
   let flipped = document.getElementsByClassName('flipped');   
   if (flipped.length === 2) {
     removeEListener();
+    // check if the two cards are the same
     check(flipped[0], flipped[1]);
   }
 }
 
 /**
- * check if two flipped cards are the same.
+ * check if two flipped cards are the same
+ * and handle them accordingly.
  */
 function check(flipped0, flipped1) {
   let cards = document.getElementsByClassName("cards");  
@@ -152,12 +152,6 @@ function reward() {
   displayResetButton();
 } 
 
-function getStar() {
-  let stars = document.getElementsByClassName('stars');
-  stars[k].setAttribute("src", "assets/images/yellow-star.jpg");
-  k++;
-}
-
 function displayResetButton() {
   let button = document.createElement('input');
   button.value = "Play again";
@@ -181,14 +175,25 @@ function updateCountdown() {
     countdownEl.style.width = "160px";
     countdownEl.innerHTML = "Time's up!";
     countdownEl.style.color = "red";
+    removeColorChange(); 
     displayResetButton();
   }
 }
- 
+
+function removeColorChange() {
+  let cards = document.getElementsByClassName("cards");   
+  for (let card of cards) {
+    card.removeEventListener("mouseover", changeColor);
+    card.removeEventListener("mouseout", changeColorBack); 
+  }
+}
+
+function addFlipCardsEventListener() {
+  let allCards = document.querySelector('#cards-wrapper'); 
+  allCards.addEventListener("click", flipCards);
+}
+
 function removeEListener() {
   let allCards = document.querySelector('#cards-wrapper'); 
   allCards.removeEventListener("click", flipCards);
 }
-  
-  
-
