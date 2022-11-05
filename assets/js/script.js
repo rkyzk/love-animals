@@ -49,13 +49,43 @@ function flipCards(event) {
   if (flipped.length === 2) {
     let allCards = document.querySelector('#cards-wrapper'); 
     allCards.removeEventListener("click", flipCards);
+    check(flipped[0], flipped[1]);
   }
 }
 
 /**
  * check if two flipped cards are the same.
  */
-function check() {
-
+function check(flipped0, flipped1) {
+  let cards = document.getElementsByClassName("cards");  
+  // if the two cards are the same, let them disappear after 1 second
+  if (flipped0.firstElementChild.getAttribute('src') === 
+    flipped1.firstElementChild.getAttribute('src')) {
+    setTimeout (function () {
+      flipped0.style.visibility = "hidden";
+      flipped1.style.visibility = "hidden";
+      flipped0.classList.remove('flipped');
+      flipped1.classList.remove('flipped');
+      // let flip card function resume
+      addFlipCardsEventListener();
+  }, 800);
+} else {
+  // if the cards are different, flip them back after 2 seconds.
+  setTimeout (function () {
+    flipped0.removeChild(flipped0.firstElementChild);
+    flipped1.removeChild(flipped1.firstElementChild);
+    flipped0.style.backgroundColor = "lightsteelblue";
+    flipped1.style.backgroundColor = "lightsteelblue";
+    flipped0.classList.remove('flipped');
+    flipped1.classList.remove('flipped');
+    // let flip card function resume
+    addFlipCardsEventListener();
+  }, 2000);
 }
+}
+
+function addFlipCardsEventListener() {
+    let allCards = document.querySelector('#cards-wrapper'); 
+    allCards.addEventListener("click", flipCards);
+  }
 
