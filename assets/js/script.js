@@ -1,5 +1,10 @@
+let cardImgs = [];
+
 document.addEventListener("DOMContentLoaded", function() {
-  assignImgToCards();
+  cardImgs = assignImgToCards();
+  console.log(cardImgs);
+  let allCards = document.querySelector('#cards-wrapper'); 
+  allCards.addEventListener("click", flipCards);
 });
 
 /**
@@ -25,8 +30,18 @@ function shuffle(images) {
 /**
  * flip cards on click  
  * */  
-function flipCard() {
-
+function flipCards(event) {
+  // append an image to the target card 
+  if (event.target.getAttribute('src') === null && event.target.tagName === 'DIV') { 
+    let num = event.target.getAttribute('id').substr(4);
+    let image = document.createElement('img');
+    image.src = 'assets/images/' + cardImgs[num - 1];
+    image.alt = cardImgs[num - 1].substr(0, cardImgs[num -1].length - 4);
+    image.style.backgroundColor = "beige";
+    image.style.width = '100%';
+    image.style.height = '100%';
+    event.target.appendChild(image);
+  }  
 }
 
 /**
