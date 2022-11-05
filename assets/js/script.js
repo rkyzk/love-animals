@@ -41,7 +41,15 @@ function flipCards(event) {
     image.style.width = '100%';
     image.style.height = '100%';
     event.target.appendChild(image);
+    event.target.classList.add('flipped');
   }  
+
+  // disable eventListener (flipCards) from all cards after two cards have been flipped
+  let flipped = document.getElementsByClassName('flipped');   
+  if (flipped.length === 2) {
+    let allCards = document.querySelector('#cards-wrapper'); 
+    allCards.removeEventListener("click", flipCards);
+  }
 }
 
 /**
