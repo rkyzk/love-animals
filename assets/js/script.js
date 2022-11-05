@@ -71,11 +71,22 @@ function check(flipped0, flipped1) {
   // if the two cards are the same, let them disappear after 1 second
   if (flipped0.firstElementChild.getAttribute('src') === 
     flipped1.firstElementChild.getAttribute('src')) {
-    setTimeout (function () {
-      flipped0.style.visibility = "hidden";
-      flipped1.style.visibility = "hidden";
-      // let flip card function resume
-      addFlipCardsEventListener();
+      setTimeout (function () {
+        flipped0.style.visibility = "hidden";
+        flipped1.style.visibility = "hidden";
+      // if all 12 cards have disappeared, execute function reward()
+      let count = 0;
+      for (let card of cards) {
+        if (card.style.visibility === "hidden") {
+          count++;
+        }
+      }
+      if (count === 2) {
+        reward();
+      } else {
+        // put back the eventListener (flipCards) to the rest of the cards
+        addFlipCardsEventListener();
+      }
     }, 800);
   } else {
     // if the cards are different, flip them back after 2 seconds.
@@ -108,5 +119,29 @@ function changeColor(event) {
 function changeColorBack(event) {
   event.target.style.backgroundColor = "lightsteelblue";
 }
+  
+function reward() {    
+  let myNode = document.getElementById('cards-wrapper');
+  myNode.innerHTML = '';
+  let message = document.createElement('h2');
+  message.innerHTML = `<em>Well Done!</em>`;
+  let graphics = document.createElement('img');
+  graphics.src = 'assets/images/savanna-forest.jpg';
+  graphics.alt = 'savanna forest';
+  myNode.append(message);   
+  myNode.append(graphics);    
+  displayResetButton();
+} 
+
+function displayResetButton() {
+  let button = document.createElement('input');
+  button.value = "Play again";
+  button.id = "reset";
+  button.type = "button";
+  button.setAttribute("onclick", "window.location.reload();");
+  let myNode = document.getElementById('cards-wrapper');
+  myNode.append(button);
+}
+  
   
 
