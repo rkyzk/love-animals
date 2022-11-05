@@ -1,4 +1,8 @@
 let cardImgs = [];
+let firstClick = true;
+let seconds = 29;
+let timer;
+let k = 0;
 
 document.addEventListener("DOMContentLoaded", function() {
   cardImgs = assignImgToCards();
@@ -37,6 +41,12 @@ function shuffle(images) {
  * flip cards on click  
  * */  
 function flipCards(event) {
+  // start running the timer on first click
+  if (firstClick === true) {
+    firstClick = false;
+    timer = setInterval(updateCountdown, 1000);
+  }
+
   // append an image to the target card 
   if (event.target.getAttribute('src') === null && event.target.tagName === 'DIV') { 
     let num = event.target.getAttribute('id').substr(4);
@@ -57,8 +67,7 @@ function flipCards(event) {
   // disable eventListener (flipCards) from all cards after two cards have been flipped
   let flipped = document.getElementsByClassName('flipped');   
   if (flipped.length === 2) {
-    let allCards = document.querySelector('#cards-wrapper'); 
-    allCards.removeEventListener("click", flipCards);
+    removeEListener();
     check(flipped[0], flipped[1]);
   }
 }
@@ -81,7 +90,7 @@ function check(flipped0, flipped1) {
           count++;
         }
       }
-      if (count === 2) {
+      if (count === 12) {
         reward();
       } else {
         // put back the eventListener (flipCards) to the rest of the cards
@@ -120,7 +129,16 @@ function changeColorBack(event) {
   event.target.style.backgroundColor = "lightsteelblue";
 }
   
+function getStar() {
+  let stars = document.getElementsByClassName('stars');
+  stars[k].setAttribute("src", "assets/images/yellow-star.jpg");
+  k++;
+}
+  
 function reward() {    
+  clearInterval(timer);
+  let countdown = document.getElementById('countdown');
+  countdown.remove();
   let myNode = document.getElementById('cards-wrapper');
   myNode.innerHTML = '';
   let message = document.createElement('h2');
@@ -141,6 +159,28 @@ function displayResetButton() {
   button.setAttribute("onclick", "window.location.reload();");
   let myNode = document.getElementById('cards-wrapper');
   myNode.append(button);
+}
+
+/** 
+ * countdown timer and display reset button
+ */
+function updateCountdown() {
+  let countdownEl = document.getElementById('countdown');
+  countdownEl.innerHTML = `0:${seconds}`;
+  seconds--;
+  if (seconds === 0) {
+    clearInterval(timer);
+    removeEListener();
+    countdownEl.style.width = "160px";
+    countdownEl.innerHTML = "Time's up!";
+    countdownEl.style.color = "red";
+    displayResetButton();
+  }
+}
+ 
+function removeEListener() {
+  let allCards = document.querySelector('#cards-wrapper'); 
+  allCards.removeEventListener("click", flipCards);
 }
   
   
