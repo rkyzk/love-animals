@@ -3,6 +3,12 @@ let cardImgs = [];
 document.addEventListener("DOMContentLoaded", function() {
   cardImgs = assignImgToCards();
   console.log(cardImgs);
+  //change the color of the card when mouseover
+  let cards = document.getElementsByClassName("cards");   
+  for (let card of cards) {
+    card.addEventListener("mouseover", changeColor);
+    card.addEventListener("mouseout", changeColorBack); 
+  }
   let allCards = document.querySelector('#cards-wrapper'); 
   allCards.addEventListener("click", flipCards);
 });
@@ -44,6 +50,10 @@ function flipCards(event) {
     event.target.classList.add('flipped');
   }  
 
+  // remove mouseover and mouseout events from the flipped card
+  event.target.removeEventListener('mouseover', changeColor); 
+  event.target.removeEventListener('mouseout', changeColorBack);  
+
   // disable eventListener (flipCards) from all cards after two cards have been flipped
   let flipped = document.getElementsByClassName('flipped');   
   if (flipped.length === 2) {
@@ -64,28 +74,39 @@ function check(flipped0, flipped1) {
     setTimeout (function () {
       flipped0.style.visibility = "hidden";
       flipped1.style.visibility = "hidden";
-      flipped0.classList.remove('flipped');
-      flipped1.classList.remove('flipped');
       // let flip card function resume
       addFlipCardsEventListener();
-  }, 800);
-} else {
-  // if the cards are different, flip them back after 2 seconds.
-  setTimeout (function () {
-    flipped0.removeChild(flipped0.firstElementChild);
-    flipped1.removeChild(flipped1.firstElementChild);
-    flipped0.style.backgroundColor = "lightsteelblue";
-    flipped1.style.backgroundColor = "lightsteelblue";
-    flipped0.classList.remove('flipped');
-    flipped1.classList.remove('flipped');
-    // let flip card function resume
-    addFlipCardsEventListener();
-  }, 2000);
-}
+    }, 800);
+  } else {
+    // if the cards are different, flip them back after 2 seconds.
+    setTimeout (function () {
+      flipped0.removeChild(flipped0.firstElementChild);
+      flipped1.removeChild(flipped1.firstElementChild);
+      flipped0.style.backgroundColor = "lightsteelblue";
+      flipped1.style.backgroundColor = "lightsteelblue";
+      flipped0.addEventListener("mouseover", changeColor);
+      flipped0.addEventListener("mouseout", changeColorBack); 
+      flipped1.addEventListener("mouseover", changeColor);
+      flipped1.addEventListener("mouseout", changeColorBack); 
+      // let flip card function resume
+      addFlipCardsEventListener();
+    }, 2000);
+  }
+  flipped0.classList.remove('flipped');
+  flipped1.classList.remove('flipped');
 }
 
 function addFlipCardsEventListener() {
-    let allCards = document.querySelector('#cards-wrapper'); 
-    allCards.addEventListener("click", flipCards);
-  }
+  let allCards = document.querySelector('#cards-wrapper'); 
+  allCards.addEventListener("click", flipCards);
+}
+
+function changeColor(event) {
+  event.target.style.backgroundColor = "lightslategray";
+}
+  
+function changeColorBack(event) {
+  event.target.style.backgroundColor = "lightsteelblue";
+}
+  
 
