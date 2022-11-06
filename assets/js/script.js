@@ -39,18 +39,19 @@ function shuffle(images) {
  * flip cards on click  
  * */  
 function flipCards(event) {
-  // start running the timer on first click
-  if (firstClick === true) {
-    firstClick = false;
-    timer = setInterval(updateCountdown, 1000);
-  }
-
-  // append an image to the target card 
+   // if not flipped yet and a card has been clicked (not the gaps), 
+   // append an image to the target card 
   if (event.target.getAttribute('src') === null && event.target.tagName === 'DIV') { 
+     // start running the timer on first click
+    if (firstClick === true) {
+      firstClick = false;
+      timer = setInterval(updateCountdown, 1000);
+    }
     let num = event.target.getAttribute('id').substr(4);
     let image = document.createElement('img');
     image.src = 'assets/images/' + cardImgs[num - 1];
-    image.alt = cardImgs[num - 1].substr(0, cardImgs[num -1].length - 4);
+    image.alt = cardImgs[num - 1].substr(0, cardImgs[num -1].lastIndexOf('.'));
+    console.log[image];
     image.style.backgroundColor = "beige";
     image.style.width = '100%';
     image.style.height = '100%';
@@ -97,7 +98,7 @@ function check(flipped0, flipped1) {
         // put back the eventListener (flipCards) to the rest of the cards
         addFlipCardsEventListener();
       }
-    }, 800);
+    }, 500);
   } else {
     // if the cards are different, flip them back after 2 seconds.
     setTimeout (function () {
@@ -148,18 +149,20 @@ function reward() {
   graphics.src = 'assets/images/savanna-forest.jpg';
   graphics.alt = 'savanna forest';
   myNode.append(message);   
-  myNode.append(graphics);    
-  displayResetButton();
+  myNode.append(graphics);   
+  displayResetButton(); 
 } 
 
 function displayResetButton() {
-  let button = document.createElement('input');
-  button.value = "Play again";
-  button.id = "reset";
-  button.type = "button";
-  button.setAttribute("onclick", "window.location.reload();");
-  let myNode = document.getElementById('cards-wrapper');
-  myNode.append(button);
+  if (document.getElementsByTagName('input').innerHTML === undefined) {
+    let myNode = document.getElementById('cards-wrapper');
+    let button = document.createElement('input');
+    button.value = "Play again";
+    button.id = "reset";
+    button.type = "button";
+    button.setAttribute("onclick", "window.location.reload();");
+    myNode.append(button);
+  }
 }
 
 /** 
@@ -170,13 +173,17 @@ function updateCountdown() {
   countdownEl.innerHTML = `0:${seconds}`;
   seconds--;
   if (seconds === 0) {
-    clearInterval(timer);
-    removeEListener();
-    countdownEl.style.width = "160px";
-    countdownEl.innerHTML = "Time's up!";
-    countdownEl.style.color = "red";
-    removeColorChange(); 
-    displayResetButton();
+    setTimeout(function() { 
+      clearInterval(timer);
+      removeEListener();
+      countdownEl.style.width = "160px";
+      countdownEl.innerHTML = "Time's up!";
+      countdownEl.style.color = "red";
+      removeColorChange(); 
+      if (document.getElementsByTagName('input').innerHTML === undefined) {
+        displayResetButton();
+      }
+    }, 2000);
   }
 }
 

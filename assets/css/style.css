@@ -62,7 +62,7 @@ img {
 
 #stars-wrapper {
   display: flex;
-  margin: 10px auto 30px;
+  margin: 30px auto 30px;
   width: 185px;
   height: 30px;
   gap: 7px;
