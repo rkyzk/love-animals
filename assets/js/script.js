@@ -6,7 +6,7 @@ let k = 0;
 
 document.addEventListener("DOMContentLoaded", function() {
   cardImgs = assignImgToCards();
-  //change the color of the card at mouseover
+  //change the color of the card at mouseover/out
   let cards = document.getElementsByClassName("cards");   
   for (let card of cards) {
     card.addEventListener("mouseover", changeColor);
@@ -39,19 +39,18 @@ function shuffle(images) {
  * flip cards on click  
  * */  
 function flipCards(event) {
-   // if not flipped yet and a card has been clicked (not the gaps), 
-   // append an image to the target card 
+  // condition: a card has been clicked (not the gaps), and it hasn't been flipped yet 
   if (event.target.getAttribute('src') === null && event.target.tagName === 'DIV') { 
-     // start running the timer on first click
+    // start running the timer on first click
     if (firstClick === true) {
       firstClick = false;
       timer = setInterval(updateCountdown, 1000);
     }
+    // append an image to the target card 
     let num = event.target.getAttribute('id').substr(4);
     let image = document.createElement('img');
     image.src = 'assets/images/' + cardImgs[num - 1];
     image.alt = cardImgs[num - 1].substr(0, cardImgs[num -1].lastIndexOf('.'));
-    console.log[image];
     image.style.backgroundColor = "beige";
     image.style.width = '100%';
     image.style.height = '100%';
@@ -78,7 +77,7 @@ function flipCards(event) {
  */
 function check(flipped0, flipped1) {
   let cards = document.getElementsByClassName("cards");  
-  // if the two cards are the same, let them disappear after 1 second
+  // if the two cards are the same, let them disappear after half a second
   if (flipped0.firstElementChild.getAttribute('src') === 
     flipped1.firstElementChild.getAttribute('src') &&
     seconds !== 0) {
@@ -101,7 +100,7 @@ function check(flipped0, flipped1) {
       }
     }, 500);
   } else {
-    // if the cards are different, flip them back after 2 seconds.
+    // if the cards are different, flip them back after 1 second.
     setTimeout (function () {
       flipped0.removeChild(flipped0.firstElementChild);
       flipped1.removeChild(flipped1.firstElementChild);
@@ -113,7 +112,7 @@ function check(flipped0, flipped1) {
       flipped1.addEventListener("mouseout", changeColorBack); 
       // let flip card function resume
       addFlipCardsEventListener();
-    }, 2000);
+    }, 1000);
   }
   flipped0.classList.remove('flipped');
   flipped1.classList.remove('flipped');
@@ -155,7 +154,7 @@ function reward() {
 } 
 
 function displayResetButton() {
-  if (document.getElementsByTagName('input')[0] === undefined) {
+  if (!document.getElementById('reset')) {
     let myNode = document.getElementById('cards-wrapper');
     let button = document.createElement('input');
     button.value = "Play again";
@@ -176,15 +175,15 @@ function updateCountdown() {
   }
   countdownEl.innerHTML = `0:${seconds}`;
   if (seconds === 0) {
-    setTimeout(function() { 
-      clearInterval(timer);
-      removeEListener();
+    clearInterval(timer);
+    removeEListener();
+    removeColorChange(); 
+    setTimeout(function() {    
       countdownEl.style.width = "160px";
       countdownEl.innerHTML = "Time's up!";
-      countdownEl.style.color = "red";
-      removeColorChange(); 
+      countdownEl.style.color = "red";     
       displayResetButton();
-    }, 200);
+    }, 400);
   }
 }
 
