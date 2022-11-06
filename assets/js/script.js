@@ -1,6 +1,6 @@
 let cardImgs = [];
 let firstClick = true;
-let seconds = 30;
+let seconds = 25;
 let timer;
 let k = 0;
 
@@ -94,7 +94,7 @@ function check(flipped0, flipped1) {
         }
       }
       if (count === 12) {
-          reward();
+        reward();
       } else {
         // put back the eventListener (flipCards) to the rest of the cards
         addFlipCardsEventListener();
