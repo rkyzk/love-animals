@@ -1,6 +1,6 @@
 let cardImgs = [];
 let firstClick = true;
-let seconds = 29;
+let seconds = 30;
 let timer;
 let k = 0;
 
@@ -80,7 +80,8 @@ function check(flipped0, flipped1) {
   let cards = document.getElementsByClassName("cards");  
   // if the two cards are the same, let them disappear after 1 second
   if (flipped0.firstElementChild.getAttribute('src') === 
-    flipped1.firstElementChild.getAttribute('src')) {
+    flipped1.firstElementChild.getAttribute('src') &&
+    seconds !== 0) {
       setTimeout (function () {
         flipped0.style.visibility = "hidden";
         flipped1.style.visibility = "hidden";
@@ -93,7 +94,7 @@ function check(flipped0, flipped1) {
         }
       }
       if (count === 12) {
-        reward();
+          reward();
       } else {
         // put back the eventListener (flipCards) to the rest of the cards
         addFlipCardsEventListener();
@@ -150,11 +151,11 @@ function reward() {
   graphics.alt = 'savanna forest';
   myNode.append(message);   
   myNode.append(graphics);   
-  displayResetButton(); 
+  displayResetButton();
 } 
 
 function displayResetButton() {
-  if (document.getElementsByTagName('input').innerHTML === undefined) {
+  if (document.getElementsByTagName('input')[0] === undefined) {
     let myNode = document.getElementById('cards-wrapper');
     let button = document.createElement('input');
     button.value = "Play again";
@@ -170,8 +171,10 @@ function displayResetButton() {
  */
 function updateCountdown() {
   let countdownEl = document.getElementById('countdown');
+  if (seconds > 0) {
+    seconds--;
+  }
   countdownEl.innerHTML = `0:${seconds}`;
-  seconds--;
   if (seconds === 0) {
     setTimeout(function() { 
       clearInterval(timer);
@@ -180,10 +183,8 @@ function updateCountdown() {
       countdownEl.innerHTML = "Time's up!";
       countdownEl.style.color = "red";
       removeColorChange(); 
-      if (document.getElementsByTagName('input').innerHTML === undefined) {
-        displayResetButton();
-      }
-    }, 2000);
+      displayResetButton();
+    }, 200);
   }
 }
 
