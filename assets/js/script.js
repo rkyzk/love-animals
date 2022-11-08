@@ -1,21 +1,25 @@
-/** Array of animal images  */
+/** Array of animal images */
 let cardImgs = [];
 
-/** whether the click event is taking place for the first time */
+/** 
+ * The variable is set true if the card has been clicked 
+ * for the first time and is set false after that
+ */
 let firstClick = true;
 
-/** time left */
-let seconds = 25;
+/** The time left */
+let seconds = 20;
 
-/** countdown function */
+/** Countdown function */
 let timer;
 
-/** the index of star images */
+/** The index of the star images */
 let k = 0;
 
 document.addEventListener("DOMContentLoaded", function() {
+  // Assign an animal image to each card
   cardImgs = assignImgToCards();
-  //change the color of the card at mouseover/out
+  // Change the color of the card at mouseover/out
   let cards = document.getElementsByClassName("cards");   
   for (let card of cards) {
     card.addEventListener("mouseover", changeColor);
@@ -25,11 +29,13 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 /**
- * assign images to the cards
+ * Assign images to the cards
+ * @return Array of animal images in a randomized order
  */
 function assignImgToCards() {
-  let images = ["elephant.png", "flamingo.png", "giraffe.png", "lion.png", "savanna-tree.jpg", "zebra.png",
-    "elephant.png", "flamingo.png", "giraffe.png", "lion.png", "savanna-tree.jpg", "zebra.png"];
+  let images = ["elephant.png", "flamingo.png", "giraffe.png", "lion.png", 
+    "savanna-tree.jpg", "zebra.png", "elephant.png", "flamingo.png", 
+    "giraffe.png", "lion.png", "savanna-tree.jpg", "zebra.png"];
   shuffle(images);
   for (i = 0; i < images.length; i++) {
     cardImgs.push(images[i]);
@@ -45,12 +51,13 @@ function shuffle(images) {
 }
 
 /**
- * flip cards on click  
- * */  
+ * Flip cards on click  
+ */  
 function flipCards(event) {
-  // condition: a card has been clicked (not the gaps), and it hasn't been flipped yet 
+  /** Condition: the card shows the blue side (not the image side), 
+    and a card has been clicked (not the gaps) */
   if (event.target.getAttribute('src') === null && event.target.tagName === 'DIV') { 
-    // start running the timer on first click
+    // start running the timer on first click and disable the function after the first click
     if (firstClick === true) {
       firstClick = false;
       timer = setInterval(updateCountdown, 1000);
@@ -67,14 +74,14 @@ function flipCards(event) {
     event.target.classList.add('flipped');
   }  
 
-  // remove mouseover and mouseout events from the flipped card
+  // remove the functions to change colors at mouseover/mouseout from the flipped card
   event.target.removeEventListener('mouseover', changeColor); 
   event.target.removeEventListener('mouseout', changeColorBack);  
 
-  // disable eventListener (flipCards) from all cards after two cards have been flipped
+  // disable eventListener (flipCards) from all the cards after two cards have been flipped
   let flipped = document.getElementsByClassName('flipped');   
   if (flipped.length === 2) {
-    removeEListener();
+    removeFlipCardsEListener();
     // check if the two cards are the same
     check(flipped[0], flipped[1]);
   }
@@ -94,10 +101,10 @@ function check(flipped0, flipped1) {
         flipped0.style.visibility = "hidden";
         flipped1.style.visibility = "hidden";
         getStar();
-      // if all 12 cards have disappeared, execute function reward()
-      let count = 0;
-      for (let card of cards) {
-        if (card.style.visibility === "hidden") {
+        // if all 12 cards have disappeared, display a reward message by calling reward()
+        let count = 0;
+        for (let card of cards) {
+          if (card.style.visibility === "hidden") {
           count++;
         }
       }
@@ -109,7 +116,7 @@ function check(flipped0, flipped1) {
       }
     }, 500);
   } else {
-    // if the cards are different, flip them back after 1 second.
+    // if the two cards don't match, flip them back after 1 second.
     setTimeout (function () {
       flipped0.removeChild(flipped0.firstElementChild);
       flipped1.removeChild(flipped1.firstElementChild);
@@ -119,7 +126,7 @@ function check(flipped0, flipped1) {
       flipped0.addEventListener("mouseout", changeColorBack); 
       flipped1.addEventListener("mouseover", changeColor);
       flipped1.addEventListener("mouseout", changeColorBack); 
-      // let flip card function resume
+      // let the flip-card function resume
       addFlipCardsEventListener();
     }, 1000);
   }
@@ -142,7 +149,7 @@ function changeColorBack(event) {
 
 /**
  * Change the color of a star from gray to yellow 
- * each time a matching pair has been flipped 
+ * each time a matching pair has been flipped. 
  */
 function getStar() {
   let stars = document.getElementsByClassName('stars');
@@ -151,7 +158,7 @@ function getStar() {
 }
   
 /**
- * Display when the user completes the game.
+ * Display a reward message when the user completes the game.
  */
 function reward() {    
   clearInterval(timer);
@@ -161,6 +168,8 @@ function reward() {
   myNode.innerHTML = '';
   let message = document.createElement('h2');
   message.innerHTML = `<em>Well Done!</em>`;
+
+  // Display forest image
   let graphics = document.createElement('img');
   graphics.src = 'assets/images/savanna-forest.jpg';
   graphics.alt = 'savanna forest';
@@ -169,6 +178,9 @@ function reward() {
   displayResetButton();
 } 
 
+/**
+ * display a reset button for refreshing the page
+ */
 function displayResetButton() {
   if (!document.getElementById('reset')) {
     let myNode = document.getElementById('cards-wrapper');
@@ -182,7 +194,7 @@ function displayResetButton() {
 }
 
 /** 
- * countdown timer and display reset button
+ * Update the countdown timer and display a reset button.
  */
 function updateCountdown() {
   let countdownEl = document.getElementById('countdown');
@@ -192,8 +204,9 @@ function updateCountdown() {
   countdownEl.innerHTML = `0:${seconds}`;
   if (seconds === 0) {
     clearInterval(timer);
-    removeEListener();
+    removeFlipCardsEListener();
     removeColorChange(); 
+    // display a comment saying "Time's up" after 0.4 seconds
     setTimeout(function() {    
       countdownEl.style.width = "160px";
       countdownEl.innerHTML = "Time's up!";
@@ -203,6 +216,9 @@ function updateCountdown() {
   }
 }
 
+/** 
+ * Disable the function to change color at mouseover/out  
+ */
 function removeColorChange() {
   let cards = document.getElementsByClassName("cards");   
   for (let card of cards) {
@@ -211,12 +227,18 @@ function removeColorChange() {
   }
 }
 
+/**
+ * Add flip-card function to all the cards
+ */
 function addFlipCardsEventListener() {
   let allCards = document.querySelector('#cards-wrapper'); 
   allCards.addEventListener("click", flipCards);
 }
 
-function removeEListener() {
+/**
+ * Remove flip-card function from all the cards
+ */
+function removeFlipCardsEListener() {
   let allCards = document.querySelector('#cards-wrapper'); 
   allCards.removeEventListener("click", flipCards);
 }

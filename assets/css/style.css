@@ -23,41 +23,41 @@ p {
 }
 
 h2 {
-  width: 130px;
-  margin: 0 auto;
   color: #333;
+  margin: 0 auto;
+  width: 130px;
 }
 
 #cards-wrapper {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 10px;
-  width: 430px;
   margin: 10px auto 0;
+  width: 430px;
 }
   
 .cards {
-  width: 100px;
-  height: 140px;
   background-color: lightsteelblue;
   border-radius: 5px;
+  height: 140px;
+  width: 100px;
 }
 
 img {
-  width: 100%;
   height: 100%;  
+  width: 100%;
 }
 
 #reset {
-  width: 130px;
-  height: 40px;
-  font-size: 1.3em;
-  margin: 20px auto;
-  border-radius: 5px;
-  border: none;
   background-color: rgb(190, 190, 139);
+  border: none;
+  border-radius: 5px;
   color: #333;
+  font-size: 1.3em;
+  height: 40px;
+  margin: 20px auto;
+  width: 130px;
 }
   
 #reset:hover {
@@ -66,28 +66,28 @@ img {
 
 #stars-wrapper {
   display: flex;
+  gap: 7px;
+  height: 30px;
   margin: 30px auto 30px;
   width: 185px;
-  height: 30px;
-  gap: 7px;
 }
   
 #stars-wrapper img {
-  width: 25px;
   height: 25px;
+  width: 25px;
 }
   
 /** for screen sizes up to 500px */
 @media only screen and (max-width: 500px) {
   #cards-wrapper {
     gap: 3px;
-    width: 321px;
     margin: 10px auto 0;
+    width: 321px;
   }
     
   .cards {
-    width: 78px;
     height: 105px;
+    width: 78px;
   }
 
   h1 {
