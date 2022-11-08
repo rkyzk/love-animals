@@ -1,7 +1,16 @@
+/** Array of animal images  */
 let cardImgs = [];
+
+/** whether the click event is taking place for the first time */
 let firstClick = true;
+
+/** time left */
 let seconds = 25;
+
+/** countdown function */
 let timer;
+
+/** the index of star images */
 let k = 0;
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -72,7 +81,7 @@ function flipCards(event) {
 }
 
 /**
- * check if two flipped cards are the same
+ * check if the two flipped cards are the same
  * and handle them accordingly.
  */
 function check(flipped0, flipped1) {
@@ -130,13 +139,20 @@ function changeColor(event) {
 function changeColorBack(event) {
   event.target.style.backgroundColor = "lightsteelblue";
 }
-  
+
+/**
+ * Change the color of a star from gray to yellow 
+ * each time a matching pair has been flipped 
+ */
 function getStar() {
   let stars = document.getElementsByClassName('stars');
   stars[k].setAttribute("src", "assets/images/yellow-star.jpg");
   k++;
 }
   
+/**
+ * Display when the user completes the game.
+ */
 function reward() {    
   clearInterval(timer);
   let countdown = document.getElementById('countdown');
