@@ -51,7 +51,7 @@ I tested that the game runs fine.
 I confirmed that all items are displayed clearly, and there's no confusion for readers to play the game.  
 I confirmed that the colors and fonts chosen are easy to read and accessible by running it through lighthouse in devtools. 
 
-![Lighthouse](assets/images/readme/lighthouse.png)
+![Lighthouse](assets/images/readme/responsiveness.png)
 
 ## Bugs 
 
