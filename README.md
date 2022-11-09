@@ -2,7 +2,7 @@
 
 ## Description: 
 "Love Animals" is a memory game with 12 cards with animal and tree images.  
-Users have 20 seconds to complete the game. Each time the page loads 
+Users have 20 seconds to complete the game. Each time the page loads, 
 the cards will be shuffled in a new order. Users can train their memory while having fun. 
 
 ![responsiveness](assets/images/readme/responsiveness.png)
@@ -12,16 +12,16 @@ the cards will be shuffled in a new order. Users can train their memory while ha
 
 ## Features
 * Existing Features
-- Header 
+- Header<br/> 
 At the top of the page, the header shows a heart icon and the game title "Love Animals!"
-This offers a friendly invitation for users to play the game.
+This offers a friendly invitation to users to play the game.
 
-- Timer
+- Timer<br/> 
 Below the header a timer is set to 20 seconds and counts down.  
 When it hits zero, a message saying "Time's up" appears in red letters.
 The timer urges users to proceed with the game as fast as possible.    
 
-- Cards
+- Cards<br/> 
 12 cards are placed in the section, and initially the back sides are faced up.
 When users bring the mouse over a card, the color turns darker so that it's clear
 which card the mouse is hovering over.
@@ -32,12 +32,12 @@ If the two cards match, they disappear after half a second.
 If the two cards don't match, they are flipped back after a second.
 I used a light blue color for the back sides of the cards and a beige color for the background 
 of the images.  
-I selected these colors because the contrast can differentiate the two sides clearly and also because the images will stand out against the light colors.  
+I selected these colors because the contrast makes the two sides clearly distinguishable and also because the images will stand out against the light colors.  
 
-- Stars
-Each time users identify a matching pair, a star turns from grey to yellow below the cards.
+- Stars<br/> 
+Each time users identify a matching pair, one of the stars placed below the cards turns from grey to yellow.
 
-- At the end of the game
+- At the end of the game<br/>
 If users complete the game within 20 seconds, the screen will dispaly a reward message, 
 graphics of the savanna forest and a reset button, saying "Play again."
 Clicking on the reset button will reload the page to display a new game.
@@ -48,7 +48,7 @@ a reset button will be displayed. In addition the function to flip the cards wil
 
 I tested playing this game in different browsers: Chrome, Safari and Firefox.
 I tested that the game runs fine.
-I confirmed that all items are displayed clearly, and there's no confusion for readers to play the game.  
+I confirmed that all items are displayed clearly, and it's clear for readers how to play the game.  
 I confirmed that the colors and fonts chosen are easy to read and accessible by running it through lighthouse in devtools. 
 
 ![Lighthouse](assets/images/readme/lighthouse.png)
@@ -83,10 +83,10 @@ The steps to deploy:
 ## Credits
 ### Media
 * Font Montserrat was imported from Google Fonts.
-* The images of animals, the tree, the savanna forest and images were downloaded from the link below:
+* All images (animals, tree and the savanna forest) were downloaded from the link below:
 
 https://www.vecteezy.com
 
 * The heart icon was imported from fontawesome.
 
-* The shuffle 46-50 was taken from https://www.w3docs.com/snippets/javascript/how-to-randomize-shuffle-a-javascript-array.html 
+* The shuffle function in script.js (46-50) was taken from https://www.w3docs.com/snippets/javascript/how-to-randomize-shuffle-a-javascript-array.html 
