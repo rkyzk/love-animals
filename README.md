@@ -12,16 +12,16 @@ HTML/CSS and JavaScript
 
 ## Features
 * Existing Features
-- Header 
+- Header <br />
 At the top of the page, the header shows a heart icon and the game title "Love Animals!"
 This offers a friendly invitation for users to play the game.
 
-- Timer
+- Timer <br />
 Below the header a timer is set to 20 seconds and counts down.  
 When it hits zero, a message saying "Time's up" appears in red letters.
 The timer urges users to proceed with the game as fast as possible.    
 
-- Cards
+- Cards <br />
 12 cards are placed in the section, and initially the back sides are faced up.
 When users bring the mouse over a card, the color turns darker so that it's clear
 which card the mouse is hovering over.
@@ -34,7 +34,7 @@ I used a light blue color for the back sides of the cards and a beige color for 
 of the images.  
 I selected these colors because the contrast can differentiate the two sides clearly and also because the images will stand out against the light colors.  
 
-- Stars
+- Stars <br />
 Each time users identify a matching pair, a star turns from grey to yellow below the cards.
 
 - At the end of the game
