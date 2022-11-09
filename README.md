@@ -89,4 +89,4 @@ https://www.vecteezy.com
 
 * The heart icon was imported from fontawesome.
 
-* The shuffle function in script.js (46-51) was taken from https://www.w3docs.com/snippets/javascript/how-to-randomize-shuffle-a-javascript-array.html 
+* The shuffle function in script.js (47-61) was taken from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array

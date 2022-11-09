@@ -36,7 +36,7 @@ function assignImgToCards() {
   let images = ["elephant.png", "flamingo.png", "giraffe.png", "lion.png", 
     "savanna-tree.jpg", "zebra.png", "elephant.png", "flamingo.png", 
     "giraffe.png", "lion.png", "savanna-tree.jpg", "zebra.png"];
-  shuffle(images);
+  images = shuffle(images);
   for (i = 0; i < images.length; i++) {
     cardImgs.push(images[i]);
   }
@@ -44,10 +44,19 @@ function assignImgToCards() {
 }
   
 function shuffle(images) {
-  for (let i = 0; i < images.length; i++) {
-    let j = Math.floor(Math.random() * images.length);
-    [images[i], images[j]] = [images[j], images[i]];
+  let currentIndex = images.length, randomIndex;
+
+  // While there are elements left to shuffle 
+  while (currentIndex != 0) {
+    // Pick a remaining element 
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [images[currentIndex], images[randomIndex]] = 
+      [images[randomIndex], images[currentIndex]];
   }
+  return images;
 }
 
 /**
