@@ -11,17 +11,17 @@ the cards will be shuffled in a new order. Users can train their memory while ha
 HTML/CSS and JavaScript
 
 ## Features
-**Existing Features
-[Header] 
+* Existing Features
+- Header 
 At the top of the page, the header shows a heart icon and the game title "Love Animals!"
 This offers a friendly invitation for users to play the game.
 
-[Timer]
+- Timer
 Below the header a timer is set to 20 seconds and counts down.  
 When it hits zero, a message saying "Time's up" appears in red letters.
 The timer urges users to proceed with the game as fast as possible.    
 
-[Cards]
+- Cards
 12 cards are placed in the section, and initially the back sides are faced up.
 When users bring the mouse over a card, the color turns darker so that it's clear
 which card the mouse is hovering over.
@@ -34,10 +34,10 @@ I used a light blue color for the back sides of the cards and a beige color for 
 of the images.  
 I selected these colors because the contrast can differentiate the two sides clearly and also because the images will stand out against the light colors.  
 
-[Stars]
+- Stars
 Each time users identify a matching pair, a star turns from grey to yellow below the cards.
 
-[At the end of the game]
+- At the end of the game
 If users complete the game within 20 seconds, the screen will dispaly a reward message, 
 graphics of the savanna forest and a reset button, saying "Play again."
 Clicking on the reset button will reload the page to display a new game.
@@ -53,10 +53,8 @@ I confirmed that the colors and fonts chosen are easy to read and accessible by 
 
 ![responsiveness](assets/images/readme/lighthouse.png)
 
-Bugs 
+* Bugs 
 
-Solved bugs
-Earlier, if I complete the game right before the time is up, the message "Time's up" would appear 
-for a short while and then the "well done" message would follow.
-I changed line 210-215 in the javascript file and delayed the appearance of "Time's up" message 
-so as to avoid instances such as mentioned above.  
+- Solved bugs
+Earlier, if I complete the game right before the time is up, the message "Time's up" would appear for a short while and then the "well done" message would follow.
+I changed line 210-215 in the javascript file and delayed the appearance of "Time's up" message so as to avoid instances such as mentioned above.  
