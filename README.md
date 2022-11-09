@@ -46,9 +46,9 @@ a reset button will be displayed. In addition the function to flip the cards wil
   
 ## Accessibility and Performance 
 
-I tested playing this game in different browsers: Chrome, Safari and Firefox.
-I tested that the game runs fine.
-I confirmed that all items are displayed clearly, and it's clear for readers how to play the game.  
+I tested playing this game in different browsers: Chrome, Safari and Firefox.<br/>
+I tested that the game runs fine.<br/>
+I confirmed that all items are displayed clearly, and it's clear for readers how to play the game.<br/>  
 I confirmed that the colors and fonts chosen are easy to read and accessible by running it through lighthouse in devtools. 
 
 ![Lighthouse](assets/images/readme/lighthouse.png)
