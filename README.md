@@ -83,7 +83,10 @@ The steps to deploy:
 ## Credits
 ### Media
 * Font Montserrat was imported from Google Fonts.
-* The images were downloaded from the links below:
+* The images of animals, the tree, the savanna forest and images were downloaded from the link below:
 
+https://www.vecteezy.com
 
 * The heart icon was imported from fontawesome.
+
+* The shuffle 46-50 was taken from https://www.w3docs.com/snippets/javascript/how-to-randomize-shuffle-a-javascript-array.html 
