@@ -16,7 +16,13 @@ h1 {
   margin-right: 10px;
 }
 
-p {
+#instruction {
+  font-size: 1.2rem;
+  margin: 0 auto;
+  width: 450px;
+}
+
+#countdown {
   font-size: 2rem;
   height: 60px;
   margin: 0 auto;
