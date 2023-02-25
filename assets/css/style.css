@@ -6,6 +6,10 @@ body {
   padding: 0;
 }
 
+#bg-img {
+  background: url('../images/background-leaves.jpg') top center;
+}
+
 h1 {
   font-size: 2.2rem;
   margin-top: 60px;
