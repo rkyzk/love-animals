@@ -2,11 +2,11 @@
 
 body {
   font-family: Montserrat, "sans-serif";
-  background: url('../images/green-palm-leaves.jpg') no-repeat center center; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+  background: url('../images/green-palm-leaves.jpg') no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .layer {
@@ -64,7 +64,7 @@ h2 {
   margin: 25px auto 0;
   width: 430px;
 }
-  
+
 .cards {
   background-color: lightsteelblue;
   border-radius: 5px;
@@ -73,7 +73,7 @@ h2 {
 }
 
 img {
-  height: 100%;  
+  height: 100%;
   width: 100%;
 }
 
@@ -87,9 +87,9 @@ img {
   margin: 20px auto;
   width: 130px;
 }
-  
+
 #reset:hover {
-  background-color:rgb(148, 148, 110);
+  background-color: rgb(148, 148, 110);
 }
 
 #stars-wrapper {
@@ -99,12 +99,12 @@ img {
   margin: 30px auto 30px;
   width: 185px;
 }
-  
+
 #stars-wrapper img {
   height: 25px;
   width: 25px;
 }
-  
+
 /** for screen sizes up to 500px */
 @media only screen and (max-width: 500px) {
   #cards-wrapper {
@@ -112,7 +112,7 @@ img {
     margin: 10px auto 0;
     width: 321px;
   }
-    
+
   .cards {
     height: 105px;
     width: 78px;
