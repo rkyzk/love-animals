@@ -220,7 +220,7 @@ function updateCountdown() {
     setTimeout(function () {
       countdownEl.style.width = "160px";
       countdownEl.innerHTML = "Time's up!";
-      countdownEl.style.color = "red";
+      countdownEl.style.color = "orange";
       displayResetButton();
     }, 400);
   }
