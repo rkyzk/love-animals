@@ -1,3 +1,10 @@
+# 動物大好き！
+
+神経衰弱（メモリーゲーム）です。20秒の間にマッチするペアを探しましょう。
+一つペアを見つけるごとに画面下の星が一つずつ黄色くなります。
+
+デプロイしたプロジェクトはこちら: [動物大好き!](https://rkyzk.github.io/love-animals/)
+---
 # Love Animals!
 
 ## Description: 
@@ -6,6 +13,8 @@ Users have 20 seconds to complete the game. Each time the page loads,
 the cards will be shuffled in a new order. Users can train their memory while having fun. 
 
 ![responsiveness](assets/images/readme/responsiveness.png)
+
+The live link to the website: [Love Animals!](https://rkyzk.github.io/love-animals/)
 
 ## Technologies used: 
 * HTML/CSS and JavaScript
@@ -78,7 +87,6 @@ The steps to deploy:
 * Click on “Pages” in the left column.
 * Under “Build and deployment,” select “deploy from a branch,” “main” and “/root” as in the photo below.
 * Then the link to the website will appear on the top of the page. 
-* the live link to the website: [Love Animals!](https://rkyzk.github.io/love-animals/)
 
 ## Credits
 ### Media

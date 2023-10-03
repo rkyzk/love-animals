@@ -195,7 +195,7 @@ function displayResetButton() {
   if (!document.getElementById('reset')) {
     let myNode = document.getElementById('cards-wrapper');
     let button = document.createElement('input');
-    button.value = "Play again";
+    button.value = "もう一度やり直す";
     button.id = "reset";
     button.type = "button";
     button.setAttribute("onclick", "window.location.reload();");
