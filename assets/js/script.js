@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
  * Assign images to the cards
  * @return Array of animal images in a randomized order
  */
-function assignImgToCards() {
+const assignImgToCards = () => {
   let images = ["elephant.png", "flamingo.png", "giraffe.png", "lion.png",
     "savanna-tree.jpg", "zebra.png", "elephant.png", "flamingo.png",
     "giraffe.png", "lion.png", "savanna-tree.jpg", "zebra.png"
@@ -44,7 +44,7 @@ function assignImgToCards() {
   return cardImgs;
 }
 
-function shuffle(images) {
+const shuffle = (images) => {
   let currentIndex = images.length,
     randomIndex;
 
@@ -63,7 +63,7 @@ function shuffle(images) {
 /**
  * Flip cards on click  
  */
-function flipCards(event) {
+const flipCards = (event) => {
   /** Condition: the card shows the blue side (not the image side), 
     and a card has been clicked (not the gaps) */
   if (event.target.getAttribute('src') === null && event.target.tagName === 'DIV') {
@@ -101,7 +101,7 @@ function flipCards(event) {
  * check if the two flipped cards are the same
  * and handle them accordingly.
  */
-function check(flipped0, flipped1) {
+const check = (flipped0, flipped1) => {
   let cards = document.getElementsByClassName("cards");
   // if the two cards are the same, let them disappear after half a second
   if (flipped0.firstElementChild.getAttribute('src') ===
@@ -144,16 +144,11 @@ function check(flipped0, flipped1) {
   flipped1.classList.remove('flipped');
 }
 
-function addFlipCardsEventListener() {
-  let allCards = document.querySelector('#cards-wrapper');
-  allCards.addEventListener("click", flipCards);
-}
-
-function changeColor(event) {
+const changeColor = (event) => {
   event.target.style.backgroundColor = "lightslategray";
 }
 
-function changeColorBack(event) {
+const changeColorBack = (event) => {
   event.target.style.backgroundColor = "lightsteelblue";
 }
 
@@ -161,7 +156,7 @@ function changeColorBack(event) {
  * Change the color of a star from gray to yellow 
  * each time a matching pair has been flipped. 
  */
-function getStar() {
+const getStar = () => {
   let stars = document.getElementsByClassName('stars');
   stars[k].setAttribute("src", "assets/images/yellow-star.jpg");
   k++;
@@ -170,7 +165,7 @@ function getStar() {
 /**
  * Display a reward message when the user completes the game.
  */
-function reward() {
+const reward = () => {
   clearInterval(timer);
   let countdown = document.getElementById('countdown');
   countdown.remove();
@@ -191,7 +186,7 @@ function reward() {
 /**
  * display a reset button for refreshing the page
  */
-function displayResetButton() {
+const displayResetButton = () => {
   if (!document.getElementById('reset')) {
     let myNode = document.getElementById('cards-wrapper');
     let button = document.createElement('input');
@@ -206,7 +201,7 @@ function displayResetButton() {
 /** 
  * Update the countdown timer and display a reset button.
  */
-function updateCountdown() {
+const updateCountdown = () => {
   let countdownEl = document.getElementById('countdown');
   if (seconds > 0) {
     seconds--;
@@ -229,7 +224,7 @@ function updateCountdown() {
 /** 
  * Disable the function to change color at mouseover/out  
  */
-function removeColorChange() {
+const removeColorChange = () => {
   let cards = document.getElementsByClassName("cards");
   for (let card of cards) {
     card.removeEventListener("mouseover", changeColor);
@@ -240,7 +235,7 @@ function removeColorChange() {
 /**
  * Add flip-card function to all the cards
  */
-function addFlipCardsEventListener() {
+const addFlipCardsEventListener = () => {
   let allCards = document.querySelector('#cards-wrapper');
   allCards.addEventListener("click", flipCards);
 }
@@ -248,7 +243,7 @@ function addFlipCardsEventListener() {
 /**
  * Remove flip-card function from all the cards
  */
-function removeFlipCardsEListener() {
+const removeFlipCardsEListener = () => {
   let allCards = document.querySelector('#cards-wrapper');
   allCards.removeEventListener("click", flipCards);
 }
