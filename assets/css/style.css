@@ -11,8 +11,9 @@ body {
 
 h1 {
   font-size: 2.2rem;
-  margin-top: 60px;
-  text-align: center;
+  margin: 60px auto 0;
+  width: 292px;
+  background-color: #fff;
 }
 
 #heart {
@@ -21,8 +22,6 @@ h1 {
 
 #instruction {
   font-size: 1.2rem;
-  margin: 0 auto;
-  width: 460px;
 }
 
 #welcome {
@@ -33,6 +32,10 @@ h1 {
 
 #intro {
   margin-bottom: 10px;
+  margin: 0 auto;
+  width: 442px;
+  font-weight: 500;
+  background-color: #fff;
 }
 
 #countdown {

@@ -190,7 +190,7 @@ const displayResetButton = () => {
   if (!document.getElementById('reset')) {
     let myNode = document.getElementById('cards-wrapper');
     let button = document.createElement('input');
-    button.value = "リセット";
+    button.value = "Reset";
     button.id = "reset";
     button.type = "button";
     button.setAttribute("onclick", "window.location.reload();");
