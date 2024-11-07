@@ -1,25 +1,24 @@
-/** Array of animal images */
+/** 画像のアレイ */
 let cardImgs = [];
 
 /** 
- * The variable is set true if the card has been clicked 
- * for the first time and is set false after that
+ * 初回にカードがクリックされた時falseに設定される。
  */
 let firstClick = true;
 
-/** The time left */
+/** 残り時間（秒） */
 let seconds = 20;
 
-/** Countdown function */
+/** カウントダウンタイマー */
 let timer;
 
-/** The index of the star images */
+/** 星マークのインデックス */
 let k = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Assign an animal image to each card
+  // 各カードに動物画像を設定
   cardImgs = assignImgToCards();
-  // Change the color of the card at mouseover/out
+  // mouseover/outでカードの色を変更
   let cards = document.getElementsByClassName("cards");
   for (let card of cards) {
     card.addEventListener("mouseover", changeColor);
@@ -29,8 +28,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /**
- * Assign images to the cards
- * @return Array of animal images in a randomized order
+ * カードに画像を設定
+ * @return 動物の画像をランダムな順に並べたアレイ
  */
 const assignImgToCards = () => {
   let images = ["elephant.png", "flamingo.png", "giraffe.png", "lion.png",
@@ -44,35 +43,34 @@ const assignImgToCards = () => {
   return cardImgs;
 }
 
+// カードを切る
 const shuffle = (images) => {
   let currentIndex = images.length,
     randomIndex;
-
-  // While there are elements left to shuffle 
+  // 並び替えしてないカードが残っている限り処理を続ける
   while (currentIndex != 0) {
-    // Pick a remaining element 
+    // 残りカードのインデックスを１つ選ぶ
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
-
-    // And swap it with the current element.
+    // currentIndexの位置にrandomIndexのカードを置く.
     [images[currentIndex], images[randomIndex]] = [images[randomIndex], images[currentIndex]];
   }
   return images;
 }
 
 /**
- * Flip cards on click  
+ * クリックされたらカードをめくる  
  */
 const flipCards = (event) => {
-  /** Condition: the card shows the blue side (not the image side), 
-    and a card has been clicked (not the gaps) */
+  /** カードの青い面が表示されていて、かつ 
+    カード自体（間のスペースでなく）がクリックされた時 */
   if (event.target.getAttribute('src') === null && event.target.tagName === 'DIV') {
-    // start running the timer on first click and disable the function after the first click
+    // 初回クリック時にカウントダウン開始
     if (firstClick === true) {
       firstClick = false;
       timer = setInterval(updateCountdown, 1000);
     }
-    // append an image to the target card 
+    // めくられたカードに画像を設定
     let num = event.target.getAttribute('id').substr(4);
     let image = document.createElement('img');
     image.src = 'assets/images/' + cardImgs[num - 1];
@@ -84,26 +82,27 @@ const flipCards = (event) => {
     event.target.classList.add('flipped');
   }
 
-  // remove the functions to change colors at mouseover/mouseout from the flipped card
+  // 捲られたカードからmouseover/mouseout時に色を変更するイベントリスナーを削除
   event.target.removeEventListener('mouseover', changeColor);
   event.target.removeEventListener('mouseout', changeColorBack);
 
-  // disable eventListener (flipCards) from all the cards after two cards have been flipped
+  // ２枚カードが捲られたら全てのカードからカードをめくるイベントリスナーを削除
   let flipped = document.getElementsByClassName('flipped');
   if (flipped.length === 2) {
     removeFlipCardsEListener();
-    // check if the two cards are the same
+    // ２枚のカードが同じかチェック
     check(flipped[0], flipped[1]);
   }
 }
 
 /**
- * check if the two flipped cards are the same
- * and handle them accordingly.
+ * ２枚のカードが同じかチェック
+ * 同じ場合画像を消す。
+ * 異なる場合
  */
 const check = (flipped0, flipped1) => {
   let cards = document.getElementsByClassName("cards");
-  // if the two cards are the same, let them disappear after half a second
+  // ２枚のカードが同じ場合、0.5秒後に画像を消す。
   if (flipped0.firstElementChild.getAttribute('src') ===
     flipped1.firstElementChild.getAttribute('src') &&
     seconds !== 0) {
@@ -111,7 +110,7 @@ const check = (flipped0, flipped1) => {
       flipped0.style.visibility = "hidden";
       flipped1.style.visibility = "hidden";
       getStar();
-      // if all 12 cards have disappeared, display a reward message by calling reward()
+      // 全12枚消えたらreward()を呼び出しよくできましたのメッセージを表示
       let count = 0;
       for (let card of cards) {
         if (card.style.visibility === "hidden") {
@@ -121,12 +120,12 @@ const check = (flipped0, flipped1) => {
       if (count === 12) {
         reward();
       } else {
-        // put back the eventListener (flipCards) to the rest of the cards
+        // カードをめくるイベントリスナー (flipCards) を残っているカードに追加
         addFlipCardsEventListener();
       }
     }, 500);
   } else {
-    // if the two cards don't match, flip them back after 1 second.
+    // ２枚のカードが異なる場合1秒後にひっくり返し青い面を表示する。
     setTimeout(function () {
       flipped0.removeChild(flipped0.firstElementChild);
       flipped1.removeChild(flipped1.firstElementChild);
@@ -136,7 +135,7 @@ const check = (flipped0, flipped1) => {
       flipped0.addEventListener("mouseout", changeColorBack);
       flipped1.addEventListener("mouseover", changeColor);
       flipped1.addEventListener("mouseout", changeColorBack);
-      // let the flip-card function resume
+      // カードをめくるイベントリスナーを追加
       addFlipCardsEventListener();
     }, 1000);
   }
@@ -153,8 +152,7 @@ const changeColorBack = (event) => {
 }
 
 /**
- * Change the color of a star from gray to yellow 
- * each time a matching pair has been flipped. 
+ * 対のカードが見つかった時星の色を灰色から黄色に変える
  */
 const getStar = () => {
   let stars = document.getElementsByClassName('stars');
@@ -163,7 +161,7 @@ const getStar = () => {
 }
 
 /**
- * Display a reward message when the user completes the game.
+ * よくできましたのメッセージを表示
  */
 const reward = () => {
   clearInterval(timer);
@@ -174,7 +172,7 @@ const reward = () => {
   let message = document.createElement('h2');
   message.innerHTML = `<em>Well Done!</em>`;
 
-  // Display forest image
+  // ジャングルのイメージを表示
   let graphics = document.createElement('img');
   graphics.src = 'assets/images/savanna-forest.jpg';
   graphics.alt = 'savanna forest';
@@ -184,7 +182,7 @@ const reward = () => {
 }
 
 /**
- * display a reset button for refreshing the page
+ * ページをリロードするためのリセットボタンを表示
  */
 const displayResetButton = () => {
   if (!document.getElementById('reset')) {
@@ -199,7 +197,7 @@ const displayResetButton = () => {
 }
 
 /** 
- * Update the countdown timer and display a reset button.
+ * カウントダウンタイマーを更新、時間切れメッセージを表示
  */
 const updateCountdown = () => {
   let countdownEl = document.getElementById('countdown');
@@ -211,7 +209,7 @@ const updateCountdown = () => {
     clearInterval(timer);
     removeFlipCardsEListener();
     removeColorChange();
-    // display a comment saying "Time's up" after 0.4 seconds
+    // 時間切れ以後0.4秒後に時間切れメッセージを表示
     setTimeout(function () {
       countdownEl.style.width = "160px";
       countdownEl.innerHTML = "Time's up!";
@@ -222,7 +220,7 @@ const updateCountdown = () => {
 }
 
 /** 
- * Disable the function to change color at mouseover/out  
+ * mouseover/outで色変更のイベントリスナーを削除する
  */
 const removeColorChange = () => {
   let cards = document.getElementsByClassName("cards");
@@ -233,7 +231,7 @@ const removeColorChange = () => {
 }
 
 /**
- * Add flip-card function to all the cards
+ * カードをめくるイベントリスナーを全カードに追加する
  */
 const addFlipCardsEventListener = () => {
   let allCards = document.querySelector('#cards-wrapper');
@@ -241,7 +239,7 @@ const addFlipCardsEventListener = () => {
 }
 
 /**
- * Remove flip-card function from all the cards
+ * カードをめくるイベントリスナーを全カードから削除
  */
 const removeFlipCardsEListener = () => {
   let allCards = document.querySelector('#cards-wrapper');
